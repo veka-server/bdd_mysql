@@ -1,0 +1,21 @@
+{
+    "name": "veka-server/bdd_mysql",
+    "description": "Une classe de gestion de Bdd mysql pour mon framework\n\n",
+    "license": "MIT",
+    "keywords": ["bdd","mysql"],
+    "authors": [
+        {
+            "name": "Vanhaezebrouck Nicolas",
+            "email": "contact@veka-server.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "VekaServer\\BddMysql\\" : "src/"
+        }
+    },
+    "require": {
+        "veka-server/interfaces": "^0.2",
+        "ext-pdo": "*"
+    }
+}
