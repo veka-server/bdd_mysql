@@ -73,6 +73,11 @@ class Bdd implements BddInterface {
     public function exec($sql, $param = [])
     {
         $stmt = $this->open($sql, $param);
+        
+        if(is_bool($stmt)){
+            return [];
+        }
+
         return $this->fetchAll($stmt);
     }
 
