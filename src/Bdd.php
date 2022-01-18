@@ -74,8 +74,8 @@ class Bdd implements BddInterface {
     {
         $stmt = $this->open($sql, $param);
         
-        if(is_bool($stmt)){
-            return [];
+        if(!($stmt instanceof \PDOStatement)){
+            return $stmt;
         }
 
         return $this->fetchAll($stmt);
@@ -261,18 +261,14 @@ class Bdd implements BddInterface {
         }
 
         if (in_array($return_type, ['UPDATE', 'DELETE'])) {
-            return $stmt->rowCount();
+            return ['rowCount' => $stmt->rowCount()];
         }
 
         if ('INSERT' == $return_type) {
-            return self::fetch($stmt);
+            return ['lastInsertId' => $this->conn->lastInsertId()];
         }
 
-        if ('NO_RETURN' == $return_type) {
-            return true;
-        }
-
-        return false;
+        return [];
     }
 
     /**
