@@ -58,6 +58,7 @@ class Bdd implements BddInterface {
             }
             $this->conn = new \PDO($dsn, $this->login, $this->password);
             $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->conn->setAttribute(\PDO::ATTR_AUTOCOMMIT,0);
         }
 
         if ($check_conn) {
