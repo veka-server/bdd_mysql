@@ -58,7 +58,6 @@ class Bdd implements BddInterface {
             }
             $this->conn = new \PDO($dsn, $this->login, $this->password);
             $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            $this->conn->setAttribute(\PDO::ATTR_AUTOCOMMIT,0);
         }
 
         if ($check_conn) {
@@ -280,16 +279,16 @@ class Bdd implements BddInterface {
         if (!$this->conn instanceof \PDO) {
             $this->connect();
         }
-        return $this->conn->query('BEGIN');
+        return $this->conn->beginTransaction();
     }
 
     public function commit()
     {
-        return $this->conn->query('COMMIT');
+        return $this->conn->commit();
     }
 
     public function rollback() {
-        return $this->conn->query('ROLLBACK');
+        return $this->conn->rollback();
     }
 
     public function fetch($stmt)
